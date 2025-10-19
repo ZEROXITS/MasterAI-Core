@@ -1,49 +1,32 @@
-# ==================================================
-# MasterAI-Core Configuration File
-# ==================================================
+# =========================
+# MasterAI-Core Configuration
+# =========================
 
-# إعدادات السيرفر
 server:
-  host: "0.0.0.0"
-  port: 8080
-  debug: true
+  host: 0.0.0.0
+  # المنفذ سيأخذه تلقائياً من متغير البيئة PORT في Replit
+  port: 5000
 
-# موديلات الذكاء الاصطناعي
-models:
-  # موديل رئيسي للإجابة على الأسئلة
-  main_model:
-    name: "gpt4all"
-    path: "./models/gpt4all-model.bin"
-    type: "llm"
+model:
+  name: "masterai-small"        # اسم الموديل الافتراضي
+  path: "./models/"             # مسار الموديلات
+  use_gpu: false                # true إذا كنت تريد استخدام GPU، Replit عادة CPU فقط
 
-  # موديلات إضافية (اختياري)
-  secondary_models:
-    - name: "distilbert"
-      path: "./models/distilbert-base-uncased"
-      type: "embedding"
-    - name: "sentence-transformer"
-      path: "./models/sentence-transformers/all-MiniLM-L6-v2"
-      type: "embedding"
-
-# إعدادات الذاكرة
 memory:
-  enable: true
-  path: "./data/memory.db"
-  max_entries: 1000
+  enable_memory: true           # تفعيل الذاكرة لتخزين المحادثات السابقة
+  memory_path: "./memory/"      # مسار ملفات الذاكرة
+  max_history: 10               # أقصى عدد من المحادثات التي تحفظ في الذاكرة
 
-# إعدادات RAG (Retrieval-Augmented Generation)
-rag:
-  enable: true
-  vector_store_path: "./data/vectorstore"
-  top_k: 5
+RAG:
+  enable_rag: true              # تفعيل البحث عن المعرفة (Retrieval Augmented Generation)
+  knowledge_path: "./knowledge/" # مجلد النصوص / المصادر
+  top_k: 5                      # عدد أفضل المستندات المرجعية للرد
 
-# إعدادات Logging
 logging:
-  level: "INFO"
-  file: "./logs/masterai.log"
+  level: "INFO"                 # DEBUG / INFO / WARNING / ERROR
+  log_file: "./logs/masterai.log"
 
-# إعدادات إضافية
-misc:
-  allow_external_requests: true
-  cache_enabled: true
-  cache_path: "./data/cache"
+ui:
+  enable_gradio: true           # تفعيل واجهة الدردشة Gradio
+  gradio_title: "MasterAI-Core Chat"
+  gradio_description: "تحدث مباشرة مع ذكاء MasterAI-Core"
