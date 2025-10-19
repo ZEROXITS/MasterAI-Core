@@ -1,0 +1,49 @@
+# ==================================================
+# MasterAI-Core Configuration File
+# ==================================================
+
+# إعدادات السيرفر
+server:
+  host: "0.0.0.0"
+  port: 8080
+  debug: true
+
+# موديلات الذكاء الاصطناعي
+models:
+  # موديل رئيسي للإجابة على الأسئلة
+  main_model:
+    name: "gpt4all"
+    path: "./models/gpt4all-model.bin"
+    type: "llm"
+
+  # موديلات إضافية (اختياري)
+  secondary_models:
+    - name: "distilbert"
+      path: "./models/distilbert-base-uncased"
+      type: "embedding"
+    - name: "sentence-transformer"
+      path: "./models/sentence-transformers/all-MiniLM-L6-v2"
+      type: "embedding"
+
+# إعدادات الذاكرة
+memory:
+  enable: true
+  path: "./data/memory.db"
+  max_entries: 1000
+
+# إعدادات RAG (Retrieval-Augmented Generation)
+rag:
+  enable: true
+  vector_store_path: "./data/vectorstore"
+  top_k: 5
+
+# إعدادات Logging
+logging:
+  level: "INFO"
+  file: "./logs/masterai.log"
+
+# إعدادات إضافية
+misc:
+  allow_external_requests: true
+  cache_enabled: true
+  cache_path: "./data/cache"
